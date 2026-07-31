@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giới thiệu - Cafe Việt</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-cafe sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fa-solid fa-mug-saucer me-2"></i>Cafe Việt</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <i class="fa-solid fa-bars fa-lg"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="order.html">Đặt hàng</a></li>
+        <li class="nav-item"><a class="nav-link" href="dashboard.html">Thống kê</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+        <div id="navUserBox"></div>
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Chuyển giao diện sáng/tối"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="container text-center animate__animated animate__fadeInUp">
+    <span class="section-label mb-3">Câu chuyện của chúng tôi</span>
+    <h1 class="hero-title mb-3">Về Cafe Việt</h1>
+    <p class="text-muted fs-5 mx-auto" style="max-width:700px;">Từ một quán nhỏ ven đường đến hệ thống quản lý số hóa — Cafe Việt luôn giữ trọn hương vị truyền thống trong từng ly cà phê.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="container my-5 py-4">
+  <div class="row align-items-center g-5">
+    <div class="col-lg-6 animate__animated animate__fadeInLeft">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80" class="img-fluid rounded-4 shadow" alt="Quán Cafe Việt">
+    </div>
+    <div class="col-lg-6">
+      <span class="section-label mb-2">Từ năm 2018</span>
+      <h2 class="mb-3">Hành trình bắt đầu từ đam mê</h2>
+      <p class="text-muted">Cafe Việt khởi nguồn từ một quán cà phê nhỏ tại Hà Nội, nơi những hạt cà phê Robusta và Arabica được chọn lọc kỹ càng, rang xay thủ công mỗi ngày. Đến nay, chúng tôi phát triển hệ thống quản lý số để phục vụ khách hàng nhanh chóng và chuyên nghiệp hơn, nhưng vẫn giữ trọn vị đậm đà quen thuộc.</p>
+      <div class="row g-3 mt-2">
+        <div class="col-4 text-center">
+          <div class="stat-value">6+</div>
+          <div class="stat-label">Năm hoạt động</div>
+        </div>
+        <div class="col-4 text-center">
+          <div class="stat-value">20+</div>
+          <div class="stat-label">Món đồ uống</div>
+        </div>
+        <div class="col-4 text-center">
+          <div class="stat-value">10k+</div>
+          <div class="stat-label">Khách hàng</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="container my-5 py-4">
+  <div class="text-center mb-5">
+    <span class="section-label mb-2">Giá trị cốt lõi</span>
+    <h2>Vì sao chọn Cafe Việt?</h2>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-seedling"></i></div>
+        <h5>Nguyên liệu chọn lọc</h5>
+        <p class="text-muted mb-0">Hạt cà phê được thu mua trực tiếp từ nông trại, đảm bảo độ tươi và chất lượng.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-heart"></i></div>
+        <h5>Phục vụ tận tâm</h5>
+        <p class="text-muted mb-0">Đội ngũ nhân viên thân thiện, luôn đặt trải nghiệm khách hàng lên hàng đầu.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-laptop-code"></i></div>
+        <h5>Công nghệ hiện đại</h5>
+        <p class="text-muted mb-0">Hệ thống quản lý số hóa giúp order nhanh, chính xác và minh bạch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="container my-5 py-4">
+  <div class="text-center mb-5">
+    <span class="section-label mb-2">Đội ngũ thực hiện</span>
+    <h2>Nhóm phát triển dự án</h2>
+    <p class="text-muted">Bài tập lớn môn Lập trình Web</p>
+  </div>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-palette"></i></div>
+        <h5>Người 1</h5>
+        <p class="text-muted mb-0">Thiết kế giao diện UI/UX, Home, About, Navbar/Footer, Responsive, Dark mode</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-mug-hot"></i></div>
+        <h5>Người 2</h5>
+        <p class="text-muted mb-0">Quản lý Menu đồ uống: CRUD, tìm kiếm, lọc, sắp xếp, validation, LocalStorage</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card text-center">
+        <div class="stat-icon mx-auto"><i class="fa-solid fa-chart-line"></i></div>
+        <h5>Người 3</h5>
+        <p class="text-muted mb-0">Quản lý Đơn hàng, Dashboard thống kê, Export/Import, Login, tổng hợp hệ thống</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (Liên hệ) -->
+<footer class="footer-cafe">
+  <div class="container text-center">
+    <span class="section-label mb-2">Liên hệ</span>
+    <h2 class="mb-2" style="color:#fff;">Ghé thăm chúng tôi</h2>
+    <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
+      <div><i class="fa-solid fa-phone icon-btn mb-2"></i><div class="opacity-75">0909 123 456</div></div>
+      <div><i class="fa-solid fa-envelope icon-btn mb-2"></i><div class="opacity-75">contact@cafeviet.vn</div></div>
+      <div><i class="fa-solid fa-location-dot icon-btn mb-2"></i><div class="opacity-75">Hà Nội, Việt Nam</div></div>
+    </div>
+    <hr class="border-light opacity-25 my-4">
+    <p class="mb-0 opacity-75">&copy; 2026 Cafe Việt.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/menuService.js"></script>
+<script src="assets/js/orderService.js"></script>
+<script src="assets/js/customerService.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/cartWidget.js"></script>
+<script src="assets/js/chatbot.js"></script>
+</body>
+</html>

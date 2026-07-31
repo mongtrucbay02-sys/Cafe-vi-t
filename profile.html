@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hồ sơ của tôi - Cafe Việt</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-cafe sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fa-solid fa-mug-saucer me-2"></i>Cafe Việt</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <i class="fa-solid fa-bars fa-lg"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="order.html">Đặt hàng</a></li>
+        <li class="nav-item"><a class="nav-link" href="dashboard.html">Thống kê</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+        <div id="navUserBox"></div>
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Chuyển giao diện sáng/tối"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+  <span class="section-label mb-2">Tài khoản của tôi</span>
+  <h2 class="mb-4"><i class="fa-solid fa-address-card me-2"></i>Hồ sơ &amp; Sổ địa chỉ</h2>
+
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <!-- THÔNG TIN CÁ NHÂN -->
+      <div class="cafe-card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0"><i class="fa-solid fa-id-card me-2"></i>Thông tin cá nhân</h5>
+          <button class="btn btn-sm btn-outline-brand btn-pill" id="btnEditProfile"><i class="fa-solid fa-pen"></i></button>
+        </div>
+        <div id="profileInfoView">
+          <div class="mb-2"><span class="text-muted small d-block">Họ và tên</span><span class="fw-bold" id="infoFullname">--</span></div>
+          <div class="mb-2"><span class="text-muted small d-block">Số điện thoại</span><span class="fw-bold" id="infoPhone">--</span></div>
+          <div class="mb-0"><span class="text-muted small d-block">Email</span><span class="fw-bold" id="infoEmail">--</span></div>
+        </div>
+        <form id="profileInfoForm" class="d-none">
+          <div class="mb-2">
+            <label class="form-label small">Họ và tên</label>
+            <input type="text" class="form-control" id="editFullname">
+          </div>
+          <div class="mb-2">
+            <label class="form-label small">Số điện thoại</label>
+            <input type="tel" class="form-control" id="editPhone">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Email</label>
+            <input type="email" class="form-control" id="editEmail">
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-brand btn-pill btn-sm">Lưu</button>
+            <button type="button" class="btn btn-outline-secondary btn-pill btn-sm" id="btnCancelEditProfile">Hủy</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- HẠNG THÀNH VIÊN -->
+      <div class="cafe-card p-4 mb-4 text-center">
+        <div class="mb-2" style="font-size:2.2rem;"><i class="fa-solid" id="tierIcon"></i></div>
+        <h5 class="mb-1" id="tierName">--</h5>
+        <div class="fw-bold fs-4" style="color:var(--brand)"><span id="tierPoints">0</span> điểm</div>
+        <p class="text-muted small mt-2 mb-0" id="tierNextInfo"></p>
+        <div class="progress mt-3" style="height:8px; border-radius:99px;">
+          <div class="progress-bar" id="tierProgressBar" style="width:0%; background:var(--brand);"></div>
+        </div>
+      </div>
+
+      <!-- SỔ ĐỊA CHỈ -->
+      <div class="cafe-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0"><i class="fa-solid fa-location-dot me-2"></i>Sổ địa chỉ</h5>
+          <button class="btn btn-sm btn-brand btn-pill" id="btnAddAddress"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div id="addressList"></div>
+        <div id="addressEmpty" class="text-muted text-center py-3 d-none">Chưa có địa chỉ nào được lưu.</div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <!-- LỊCH SỬ ĐƠN HÀNG -->
+      <div class="cafe-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0"><i class="fa-solid fa-receipt me-2"></i>Lịch sử đơn hàng</h5>
+          <span class="badge rounded-pill" style="background:var(--accent-soft); color:var(--brand);" id="profileOrderCount">0 đơn</span>
+        </div>
+        <div id="profileOrderList" style="max-height:640px; overflow-y:auto;"></div>
+        <div id="profileOrderEmpty" class="text-muted text-center py-4 d-none">
+          <i class="fa-solid fa-mug-hot fa-2x mb-2 d-block"></i>Chưa có đơn hàng nào. <a href="order.html">Đặt hàng ngay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL THÊM/SỬA ĐỊA CHỈ -->
+<div class="modal fade" id="addressModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addressModalTitle">Thêm địa chỉ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="addressId">
+        <div class="mb-3">
+          <label class="form-label">Nhãn</label>
+          <select class="form-select" id="addressLabel">
+            <option>Nhà riêng</option>
+            <option>Công ty</option>
+            <option>Nhà người yêu</option>
+            <option>Khác</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Địa chỉ chi tiết</label>
+          <textarea class="form-control" id="addressDetail" rows="3" placeholder="Số nhà, đường, phường/xã, quận/huyện..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary btn-pill" data-bs-dismiss="modal">Đóng</button>
+        <button class="btn btn-brand btn-pill" id="btnSaveAddress">Lưu địa chỉ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/menuService.js"></script>
+<script src="assets/js/orderService.js"></script>
+<script src="assets/js/customerService.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/cartWidget.js"></script>
+<script src="assets/js/chatbot.js"></script>
+<script src="assets/js/profile.js"></script>
+</body>
+</html>
