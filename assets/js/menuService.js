@@ -81,6 +81,54 @@ const MenuService = {
     localStorage.removeItem(STORAGE_KEY);
   },
 
+  /** Xuất toàn bộ sản phẩm ra file JSON để tải về máy */
+  exportToJson() {
+    const list = MenuService.getAll();
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `cafe-menu-${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    return list.length;
+  },
+
+  /**
+   * Nhập danh sách sản phẩm từ file JSON (khôi phục dữ liệu).
+   * mode: "replace" (ghi đè toàn bộ) | "merge" (gộp thêm, tránh trùng id)
+   */
+  importFromJson(jsonText, mode = "replace") {
+    let imported;
+    try {
+      imported = JSON.parse(jsonText);
+    } catch (e) {
+      throw new Error("File JSON không hợp lệ.");
+    }
+    if (!Array.isArray(imported)) {
+      throw new Error("Nội dung JSON phải là một danh sách sản phẩm.");
+    }
+
+    if (mode === "merge") {
+      const current = MenuService.getAll();
+      const existingIds = new Set(current.map((p) => p.id));
+      const merged = [...current];
+      imported.forEach((p) => {
+        if (!existingIds.has(p.id)) {
+          merged.push(p);
+          existingIds.add(p.id);
+        }
+      });
+      MenuService.saveAll(merged);
+      return merged.length;
+    }
+
+    MenuService.saveAll(imported);
+    return imported.length;
+  },
+
   /** Thống kê nhanh */
   getStats() {
     const list = MenuService.getAll();

@@ -306,6 +306,68 @@ document.getElementById("btnClearAll").addEventListener("click", () => {
   });
 });
 
+/* ---------- EXPORT / IMPORT JSON ---------- */
+document.getElementById("btnExportMenuJson").addEventListener("click", () => {
+  if (MenuService.getAll().length === 0) {
+    showToast("Không có sản phẩm nào để xuất.", "danger");
+    return;
+  }
+  const count = MenuService.exportToJson();
+  showToast(`Đã xuất ${count} sản phẩm ra file JSON.`, "success");
+});
+
+const btnImportMenuJson = document.getElementById("btnImportMenuJson");
+const inputImportMenuJson = document.getElementById("inputImportMenuJson");
+
+btnImportMenuJson.addEventListener("click", () => inputImportMenuJson.click());
+
+inputImportMenuJson.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const finishImport = (mode) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const count = MenuService.importFromJson(reader.result, mode);
+        currentPage = 1;
+        renderTable();
+        showToast(`Đã nhập ${count} sản phẩm từ file JSON.`, "success");
+      } catch (err) {
+        Swal.fire("Lỗi", err.message || "Không thể đọc file JSON.", "error");
+      } finally {
+        inputImportMenuJson.value = "";
+      }
+    };
+    reader.onerror = () => {
+      Swal.fire("Lỗi", "Không thể đọc file đã chọn.", "error");
+      inputImportMenuJson.value = "";
+    };
+    reader.readAsText(file);
+  };
+
+  if (MenuService.getAll().length > 0) {
+    Swal.fire({
+      title: "Nhập dữ liệu sản phẩm",
+      text: "Bạn muốn ghi đè toàn bộ sản phẩm hiện có hay gộp thêm vào?",
+      icon: "question",
+      showCancelButton: true,
+      showDenyButton: true,
+      confirmButtonText: "Ghi đè",
+      denyButtonText: "Gộp thêm",
+      cancelButtonText: "Hủy",
+      confirmButtonColor: "#B4432B",
+      denyButtonColor: "#8B5E3C",
+    }).then((result) => {
+      if (result.isConfirmed) finishImport("replace");
+      else if (result.isDenied) finishImport("merge");
+      else inputImportMenuJson.value = "";
+    });
+  } else {
+    finishImport("replace");
+  }
+});
+
 document.getElementById("fieldImage").addEventListener("input", (e) => {
   document.getElementById("fieldImagePreview").src = e.target.value.trim() || MenuService.DEFAULT_IMAGE;
 });
