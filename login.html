@@ -21,7 +21,6 @@
       <i class="fa-solid fa-mug-hot fa-3x mb-3"></i>
       <h2 class="text-white">Cafe Việt</h2>
       <p class="mb-0 opacity-75">Hệ thống quản lý quán cà phê giúp bạn theo dõi menu, tồn kho và doanh số bán hàng mọi lúc mọi nơi.</p>
-      <hr class="border-light opacity-25 my-4">
     </div>
     <div class="col-lg-7">
       <div class="p-4 p-md-5">
@@ -51,12 +50,18 @@
               <div class="mb-3 was-validated-field">
                 <label class="form-label">Mật khẩu</label>
                 <div class="input-group">
-                  <!-- Đã xóa placeholder dấu chấm ở phần Đăng nhập -->
                   <input type="password" class="form-control" id="password" placeholder="" autocomplete="current-password">
                   <button class="btn btn-outline-secondary" type="button" id="togglePwd"><i class="fa-solid fa-eye"></i></button>
                 </div>
                 <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
               </div>
+              
+              <!-- Checkbox Lưu thông tin -->
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label text-muted" for="rememberMe" style="cursor: pointer;">Lưu thông tin</label>
+              </div>
+
               <div id="loginError" class="alert alert-danger d-none py-2"></div>
               <button type="submit" class="btn btn-brand w-100 btn-pill py-2">
                 <i class="fa-solid fa-right-to-bracket me-2"></i>Đăng nhập
@@ -97,7 +102,6 @@
               </div>
               <div class="mb-3 was-validated-field">
                 <label class="form-label">Mật khẩu (tối thiểu 6 ký tự)</label>
-                <!-- Đã xóa placeholder dấu chấm ở phần Đăng ký -->
                 <input type="password" class="form-control" id="regPassword" placeholder="">
                 <div class="invalid-feedback">Mật khẩu tối thiểu 6 ký tự.</div>
               </div>
@@ -118,13 +122,24 @@
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/chatbot.js"></script>
 <script>
-  // Dark mode riêng cho trang login
+  // 1. Tự động điền dữ liệu ra ô input nếu đã từng nhấn "Lưu thông tin"
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedUser = localStorage.getItem("cafe_saved_user");
+    const savedPass = localStorage.getItem("cafe_saved_pass");
+    if (savedUser && savedPass) {
+      document.getElementById("username").value = savedUser;
+      document.getElementById("password").value = savedPass;
+      document.getElementById("rememberMe").checked = true;
+    }
+  });
+
   const THEME_KEY = "cafe_theme";
   (function () {
     const saved = localStorage.getItem(THEME_KEY) || "light";
     document.documentElement.setAttribute("data-theme", saved);
     document.getElementById("themeIcon").className = saved === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
   })();
+  
   document.getElementById("themeToggleBtn").addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme");
     const next = current === "dark" ? "light" : "dark";
@@ -140,12 +155,26 @@
     else { pwd.type = "password"; icon.className = "fa-solid fa-eye"; }
   });
 
-  // Nếu đã đăng nhập rồi thì chuyển thẳng vào trang phù hợp với vai trò
+  // 2. KIỂM TRA ĐĂNG NHẬP THÔNG MINH
   if (AuthService.isLoggedIn()) {
-    const s = AuthService.getSession();
-    window.location.href = s.role === "admin" ? "menu.html" : "order.html";
+    const hasSavedInfo = localStorage.getItem("cafe_saved_user") !== null; // Xem có chọn lưu ko
+    const isCurrentSession = sessionStorage.getItem("cafe_active_session") === "true"; // Xem có phải đang dùng web ko
+
+    // Nếu chọn "Lưu thông tin" HOẶC đang dùng web (chưa tắt trình duyệt) thì cho vào thẳng
+    if (hasSavedInfo || isCurrentSession) {
+      const s = AuthService.getSession();
+      window.location.href = s.role === "admin" ? "menu.html" : "order.html";
+    } else {
+      // Nếu tắt trình duyệt mà KHÔNG lưu thông tin -> Ép đăng xuất
+      if (typeof AuthService.logout === 'function') {
+        AuthService.logout();
+      } else {
+        localStorage.clear(); // Xóa thủ công nếu AuthService không có hàm logout
+      }
+    }
   }
 
+  // 3. XỬ LÝ KHI BẤM NÚT ĐĂNG NHẬP
   document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const username = document.getElementById("username");
@@ -160,7 +189,22 @@
     if (!valid) return;
 
     const errorBox = document.getElementById("loginError");
+    
     if (AuthService.login(username.value.trim(), password.value.trim())) {
+      
+      // Xử lý lưu hay không lưu thông tin
+      const isRemember = document.getElementById("rememberMe").checked;
+      if (isRemember) {
+        localStorage.setItem("cafe_saved_user", username.value.trim());
+        localStorage.setItem("cafe_saved_pass", password.value.trim());
+      } else {
+        localStorage.removeItem("cafe_saved_user");
+        localStorage.removeItem("cafe_saved_pass");
+      }
+      
+      // Đánh dấu đây là một phiên hoạt động hợp lệ (để f5 trang không bị văng)
+      sessionStorage.setItem("cafe_active_session", "true");
+
       errorBox.classList.add("d-none");
       const session = AuthService.getSession();
       window.location.href = session.role === "admin" ? "menu.html" : "order.html";
@@ -179,20 +223,17 @@
     const password = document.getElementById("regPassword");
     let valid = true;
 
-    // Kiểm tra các trường không được để trống
     [fullname, phone, email, username].forEach((field) => {
       const wrap = field.closest(".was-validated-field");
       if (!field.value.trim()) { wrap.classList.add("is-invalid"); valid = false; }
       else wrap.classList.remove("is-invalid");
     });
 
-    // Kiểm tra định dạng email cơ bản
     const emailWrap = email.closest(".was-validated-field");
     if (email.value.trim() && !/^\S+@\S+\.\S+$/.test(email.value)) {
         emailWrap.classList.add("is-invalid"); valid = false;
     }
 
-    // Kiểm tra mật khẩu
     const pwdWrap = password.closest(".was-validated-field");
     if (password.value.length < 6) { pwdWrap.classList.add("is-invalid"); valid = false; }
     else pwdWrap.classList.remove("is-invalid");
