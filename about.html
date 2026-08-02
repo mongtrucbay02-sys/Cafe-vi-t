@@ -114,26 +114,86 @@
     <div class="col-md-4">
       <div class="stat-card text-center">
         <div class="stat-icon mx-auto"><i class="fa-solid fa-palette"></i></div>
-        <h5>Người 1</h5>
+        <h5>Hoàng Minh Quân</h5>
         <p class="text-muted mb-0">Thiết kế giao diện UI/UX, Home, About, Navbar/Footer, Responsive, Dark mode</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stat-card text-center">
         <div class="stat-icon mx-auto"><i class="fa-solid fa-mug-hot"></i></div>
-        <h5>Người 2</h5>
+        <h5>Nguyễn Tiến Trung</h5>
         <p class="text-muted mb-0">Quản lý Menu đồ uống: CRUD, tìm kiếm, lọc, sắp xếp, validation, LocalStorage</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stat-card text-center">
         <div class="stat-icon mx-auto"><i class="fa-solid fa-chart-line"></i></div>
-        <h5>Người 3</h5>
+        <h5>Trần Trung Kiên</h5>
         <p class="text-muted mb-0">Quản lý Đơn hàng, Dashboard thống kê, Export/Import, Login, tổng hợp hệ thống</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CONTACT US -->
+<section class="container my-5 py-4" id="contact">
+  <div class="text-center mb-5">
+    <span class="section-label mb-2">Liên hệ</span>
+    <h2>Contact Us</h2>
+    <p class="text-muted">Bạn có câu hỏi hoặc góp ý? Hãy gửi lời nhắn cho chúng tôi.</p>
+  </div>
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-5">
+      <div class="stat-card h-100">
+        <h5 class="mb-4"><i class="fa-solid fa-address-card me-2" style="color:var(--brand);"></i>Thông tin liên hệ</h5>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="fa-solid fa-location-dot" style="color:var(--brand); width:20px;"></i>
+          <div class="text-muted">Hà Nội, Việt Nam</div>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="fa-solid fa-phone" style="color:var(--brand); width:20px;"></i>
+          <div class="text-muted">0909 123 456</div>
+        </div>
+        <div class="d-flex align-items-start gap-3 mb-3">
+          <i class="fa-solid fa-envelope" style="color:var(--brand); width:20px;"></i>
+          <div class="text-muted">contact@cafeviet.vn</div>
+        </div>
+        <div class="d-flex align-items-start gap-3">
+          <i class="fa-solid fa-clock" style="color:var(--brand); width:20px;"></i>
+          <div class="text-muted">Mở cửa: 6:30 - 22:00 (Tất cả các ngày)</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="stat-card h-100">
+        <form id="contactForm">
+          <div class="mb-3">
+            <label class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" id="contactName" placeholder="Nhập họ tên của bạn" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="contactEmail" placeholder="Nhập email của bạn" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Lời nhắn</label>
+            <textarea class="form-control" id="contactMessage" rows="4" placeholder="Nội dung bạn muốn gửi..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-brand btn-pill px-4">Gửi liên hệ</button>
+          <div id="contactSuccess" class="text-success mt-3 d-none"><i class="fa-solid fa-circle-check me-1"></i>Cảm ơn bạn! Chúng tôi sẽ phản hồi sớm nhất có thể.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('contactForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('contactSuccess').classList.remove('d-none');
+    this.reset();
+  });
+</script>
 
 <!-- FOOTER (Liên hệ) -->
 <footer class="footer-cafe">
