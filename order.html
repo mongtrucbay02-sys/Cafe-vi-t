@@ -128,6 +128,12 @@
           <h5 class="mb-0"><i class="fa-solid fa-receipt me-2"></i>Lịch sử đơn hàng</h5>
           <span class="badge rounded-pill" style="background:var(--accent-soft); color:var(--brand);" id="orderCountBadge">0 đơn</span>
         </div>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-sm btn-outline-secondary btn-pill" id="btnExportOrdersJson" type="button"><i class="fa-solid fa-file-export me-1"></i>Export JSON</button>
+          <button class="btn btn-sm btn-outline-secondary btn-pill" id="btnImportOrdersJson" type="button"><i class="fa-solid fa-file-import me-1"></i>Import JSON</button>
+          <input type="file" id="inputImportOrdersJson" accept="application/json,.json" class="d-none">
+          <button class="btn btn-sm btn-outline-danger btn-pill" id="btnClearAllOrders" type="button"><i class="fa-solid fa-trash-can me-1"></i>Clear All</button>
+        </div>
         <div id="orderHistoryList" style="max-height:320px; overflow-y:auto;"></div>
         <div id="orderHistoryEmpty" class="text-muted text-center py-4 d-none">Chưa có đơn hàng nào.</div>
       </div>

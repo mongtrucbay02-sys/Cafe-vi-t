@@ -486,6 +486,98 @@ document.getElementById("btnCheckout").addEventListener("click", () => {
   });
 });
 
+/* ---------- CLEAR ALL / EXPORT / IMPORT JSON ---------- */
+const btnClearAllOrders = document.getElementById("btnClearAllOrders");
+const btnExportOrdersJson = document.getElementById("btnExportOrdersJson");
+const btnImportOrdersJson = document.getElementById("btnImportOrdersJson");
+const inputImportOrdersJson = document.getElementById("inputImportOrdersJson");
+
+if (btnClearAllOrders) {
+  btnClearAllOrders.addEventListener("click", () => {
+    if (OrderService.getAllOrders().length === 0) {
+      showToast("Không có đơn hàng nào để xóa.", "danger");
+      return;
+    }
+    Swal.fire({
+      title: "Xóa toàn bộ đơn hàng?",
+      text: "Toàn bộ lịch sử đơn hàng đã lưu trong trình duyệt sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Xóa hết",
+      cancelButtonText: "Hủy",
+      confirmButtonColor: "#B4432B",
+      cancelButtonColor: "#8B5E3C",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        OrderService.clearAllOrders();
+        renderOrderHistory();
+        showToast("Đã xóa toàn bộ đơn hàng.", "success");
+      }
+    });
+  });
+}
+
+if (btnExportOrdersJson) {
+  btnExportOrdersJson.addEventListener("click", () => {
+    if (OrderService.getAllOrders().length === 0) {
+      showToast("Không có đơn hàng nào để xuất.", "danger");
+      return;
+    }
+    const count = OrderService.exportOrdersToJson();
+    showToast(`Đã xuất ${count} đơn hàng ra file JSON.`, "success");
+  });
+}
+
+if (btnImportOrdersJson && inputImportOrdersJson) {
+  btnImportOrdersJson.addEventListener("click", () => inputImportOrdersJson.click());
+
+  inputImportOrdersJson.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const finishImport = (mode) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const count = OrderService.importOrdersFromJson(reader.result, mode);
+          renderOrderHistory();
+          showToast(`Đã nhập ${count} đơn hàng từ file JSON.`, "success");
+        } catch (err) {
+          Swal.fire("Lỗi", err.message || "Không thể đọc file JSON.", "error");
+        } finally {
+          inputImportOrdersJson.value = "";
+        }
+      };
+      reader.onerror = () => {
+        Swal.fire("Lỗi", "Không thể đọc file đã chọn.", "error");
+        inputImportOrdersJson.value = "";
+      };
+      reader.readAsText(file);
+    };
+
+    if (OrderService.getAllOrders().length > 0) {
+      Swal.fire({
+        title: "Nhập dữ liệu đơn hàng",
+        text: "Bạn muốn ghi đè toàn bộ đơn hàng hiện có hay gộp thêm vào?",
+        icon: "question",
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: "Ghi đè",
+        denyButtonText: "Gộp thêm",
+        cancelButtonText: "Hủy",
+        confirmButtonColor: "#B4432B",
+        denyButtonColor: "#8B5E3C",
+      }).then((result) => {
+        if (result.isConfirmed) finishImport("replace");
+        else if (result.isDenied) finishImport("merge");
+        else inputImportOrdersJson.value = "";
+      });
+    } else {
+      finishImport("replace");
+    }
+  });
+}
+
 /* ---------- INIT ---------- */
 const orderParams = new URLSearchParams(location.search);
 const preselect = orderParams.get("q");
