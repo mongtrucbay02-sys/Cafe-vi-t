@@ -1,6 +1,17 @@
-# ☕ Cafe Việt - Hệ thống Quản lý Quán Cà Phê
+# ☕ Quản Lý Quán Cafe
 
-Bài tập lớn môn Lập trình Web — Website quản lý quán cà phê (CRUD Menu, Đặt hàng, Thống kê).
+Báo cáo cuối kỳ môn **Lập trình Web** — Trường Đại học CMC — Website quản lý quán cà phê (CRUD Menu, Đặt hàng, Thống kê).
+
+**Giảng viên hướng dẫn:** Ngô Việt Anh
+**Nhóm sinh viên:**
+- Hoàng Minh Quân — BIT240194
+- Nguyễn Tiến Trung — BIT240231
+- Trần Trung Kiên — BIT240135
+
+## 🌐 Demo & Tài liệu
+- **Web trực tuyến:** https://mongtrucbay02-sys.github.io/Cafe-vi-t/
+- **Video demo:** https://drive.google.com/file/d/1_KG3Bm-PzCXAwk5jBLLxe7tM1qjGx-DU/view?usp=drive_link
+- **Báo cáo chi tiết:** [cafe-managenment.docx](./cafe-managenment.docx)
 
 ## 🚀 Công nghệ sử dụng
 - HTML5, CSS3, JavaScript ES6+
@@ -14,28 +25,28 @@ Bài tập lớn môn Lập trình Web — Website quản lý quán cà phê (CR
 
 | Thành viên | Công việc | Sản phẩm |
 |---|---|---|
-| **Người 1** | Thiết kế giao diện UI/UX: Home, About, Navbar, Footer, Responsive, Dark mode, hiệu ứng | `index.html`, `about.html`, `assets/css/style.css` |
-| **Người 2** | Quản lý Menu đồ uống (CRUD): thêm/sửa/xóa, tìm kiếm, lọc theo loại, sắp xếp theo giá, validation, LocalStorage | `menu.html`, `assets/js/menu.js`, `assets/js/menuService.js` |
-| **Người 3** | Quản lý Đơn hàng & hoàn thiện hệ thống: giỏ hàng, tính tiền, thanh toán, Dashboard thống kê (Chart.js), Export/Import JSON, Login giả lập, ghép code | `order.html`, `dashboard.html`, `login.html`, `assets/js/order.js`, `assets/js/orderService.js`, `assets/js/dashboard.js`, `assets/js/auth.js`, `assets/js/app.js` |
+| **Hoàng Minh Quân** | Thiết kế giao diện UI/UX: Home, About, Navbar, Footer, Responsive, Dark mode, hiệu ứng | `index.html`, `about.html`, `assets/css/style.css` |
+| **Nguyễn Tiến Trung** | Quản lý Menu đồ uống (CRUD): thêm/sửa/xóa, tìm kiếm, lọc theo loại, sắp xếp theo giá, validation, LocalStorage | `menu.html`, `assets/js/menu.js`, `assets/js/menuService.js` |
+| **Trần Trung Kiên** | Quản lý Đơn hàng & hoàn thiện hệ thống: giỏ hàng, tính tiền, thanh toán, Dashboard thống kê (Chart.js), Export/Import JSON, Login giả lập, ghép code | `order.html`, `dashboard.html`, `login.html`, `assets/js/order.js`, `assets/js/orderService.js`, `assets/js/dashboard.js`, `assets/js/auth.js`, `assets/js/app.js` |
 
 ## 📁 Cấu trúc thư mục
 ```
-/index.html                  → Trang chủ                          (Người 1)
-/about.html                  → Giới thiệu                          (Người 1)
-/menu.html                   → Quản lý Menu đồ uống (CRUD)         (Người 2)
-/order.html                  → Đặt hàng / Giỏ hàng / Thanh toán    (Người 3)
-/dashboard.html               → Dashboard thống kê + Best Sale      (Người 3)
-/login.html                  → Đăng nhập giả lập                   (Người 3)
+/index.html                  → Trang chủ                          (Hoàng Minh Quân)
+/about.html                  → Giới thiệu                          (Hoàng Minh Quân)
+/menu.html                   → Quản lý Menu đồ uống (CRUD)         (Nguyễn Tiến Trung)
+/order.html                  → Đặt hàng / Giỏ hàng / Thanh toán    (Trần Trung Kiên)
+/dashboard.html               → Dashboard thống kê + Best Sale      (Trần Trung Kiên)
+/login.html                  → Đăng nhập giả lập                   (Trần Trung Kiên)
 
-/assets/css/style.css         → Giao diện dùng chung + Dark mode    (Người 1)
+/assets/css/style.css         → Giao diện dùng chung + Dark mode    (Hoàng Minh Quân)
 
 /assets/js/app.js             → Hàm dùng chung (dark mode, toast, navbar)
 /assets/js/auth.js            → Đăng nhập giả lập + session LocalStorage
-/assets/js/menuService.js      → Xử lý CRUD + LocalStorage cho Menu   (Người 2)
-/assets/js/menu.js            → Logic trang quản lý Menu             (Người 2)
-/assets/js/orderService.js     → Xử lý giỏ hàng, đơn hàng, thanh toán (Người 3)
-/assets/js/order.js            → Logic trang Đặt hàng                (Người 3)
-/assets/js/dashboard.js         → Logic biểu đồ thống kê              (Người 3)
+/assets/js/menuService.js      → Xử lý CRUD + LocalStorage cho Menu   (Nguyễn Tiến Trung)
+/assets/js/menu.js            → Logic trang quản lý Menu             (Nguyễn Tiến Trung)
+/assets/js/orderService.js     → Xử lý giỏ hàng, đơn hàng, thanh toán (Trần Trung Kiên)
+/assets/js/order.js            → Logic trang Đặt hàng                (Trần Trung Kiên)
+/assets/js/dashboard.js         → Logic biểu đồ thống kê              (Trần Trung Kiên)
 ```
 
 ## 🔑 Tài khoản đăng nhập demo
@@ -44,18 +55,18 @@ Bài tập lớn môn Lập trình Web — Website quản lý quán cà phê (CR
 
 ## ✅ Chức năng chính
 
-### Người 1 — Giao diện
+### Hoàng Minh Quân — Giao diện
 - Trang chủ + Giới thiệu, Navbar + Footer, Responsive (mobile/tablet/desktop)
 - Dark mode / Light mode (lưu lựa chọn trong LocalStorage)
 - Hiệu ứng chuyển động (Animate.css), thiết kế theo phong cách quán cà phê ấm áp
 
-### Người 2 — Quản lý Menu (CRUD)
+### Nguyễn Tiến Trung — Quản lý Menu (CRUD)
 - Thêm / Sửa / Xóa món, đổi trạng thái Còn hàng ⇄ Hết hàng
 - Tìm kiếm theo tên/mô tả, lọc theo danh mục & trạng thái, sắp xếp theo giá/bán chạy, phân trang
 - Validation dữ liệu đầu vào realtime (tên, giá, tồn kho, mô tả tối thiểu 10 ký tự)
 - Lưu dữ liệu LocalStorage, Export/Import JSON, Clear All (có confirm)
 
-### Người 3 — Đơn hàng & Hệ thống
+### Trần Trung Kiên — Đơn hàng & Hệ thống
 - Tạo đơn hàng: chọn món từ menu còn hàng, thêm/xóa món trong giỏ, đổi số lượng
 - Tự động tính tổng tiền, Thanh toán → trừ tồn kho + cộng số lượng đã bán vào Menu
 - Lưu lịch sử đơn hàng bằng LocalStorage
