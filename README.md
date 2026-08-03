@@ -10,7 +10,7 @@ Báo cáo cuối kỳ môn **Lập trình Web** — Trường Đại học CMC �
 
 ## 🌐 Demo & Tài liệu
 - **Web trực tuyến:** https://mongtrucbay02-sys.github.io/Cafe-vi-t/
-- **Video demo:** https://drive.google.com/file/d/1_KG3Bm-PzCXAwk5jBLLxe7tM1qjGx-DU/view?usp=sharing
+- **Video demo:** https://drive.google.com/file/d/1w1KBtgalrTFBXUcPrY9ZkCNg9fP7I5tw/view?usp=drive_link
 - **Báo cáo chi tiết:** [cafe-managenment.docx](./cafe-managenment.docx)
 
 ## 🚀 Công nghệ sử dụng
